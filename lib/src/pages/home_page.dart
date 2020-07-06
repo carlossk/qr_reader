@@ -32,37 +32,7 @@ class _HomePageState extends State<HomePage> {
               })
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-          color: Theme.of(context).primaryColor,
-          shape: const CircularNotchedRectangle(),
-          child: Container(
-            height: 60,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                    child: IconButton(
-                        icon: Icon(Icons.map, color: Colors.white),
-                        onPressed: () {
-                          setState(() {
-                            _title = 'Geolocation';
-                            currentIndex = 0;
-                          });
-                        })),
-                Expanded(
-                    child: IconButton(
-                        icon: Icon(
-                          Icons.devices_other,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _title = 'Others';
-                            currentIndex = 1;
-                          });
-                        }))
-              ],
-            ),
-          )),
+      bottomNavigationBar: _createBottomAppBar(),
       body: _callPage(currentIndex),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
@@ -73,6 +43,40 @@ class _HomePageState extends State<HomePage> {
         child: Icon(Icons.filter_center_focus),
       ),
     );
+  }
+
+  Widget _createBottomAppBar() {
+    return BottomAppBar(
+        color: Theme.of(context).primaryColor,
+        shape: const CircularNotchedRectangle(),
+        child: Container(
+          height: 60,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                  child: IconButton(
+                      icon: Icon(Icons.map, color: Colors.white),
+                      onPressed: () {
+                        setState(() {
+                          _title = 'Geolocation';
+                          currentIndex = 0;
+                        });
+                      })),
+              Expanded(
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.devices_other,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _title = 'Others';
+                          currentIndex = 1;
+                        });
+                      })),
+            ],
+          ),
+        ));
   }
 
   Widget _createBottomNavigationBar() {
