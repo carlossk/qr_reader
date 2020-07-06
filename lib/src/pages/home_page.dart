@@ -18,11 +18,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final scanBloc = ScansBloc();
   int currentIndex = 0;
+  String _title = 'Geolocation';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Qr Scan'),
+        title: Text(_title),
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.delete),
@@ -43,6 +44,7 @@ class _HomePageState extends State<HomePage> {
                         icon: Icon(Icons.map, color: Colors.white),
                         onPressed: () {
                           setState(() {
+                            _title = 'Geolocation';
                             currentIndex = 0;
                           });
                         })),
@@ -54,6 +56,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         onPressed: () {
                           setState(() {
+                            _title = 'Others';
                             currentIndex = 1;
                           });
                         }))
