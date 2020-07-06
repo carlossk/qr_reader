@@ -31,7 +31,35 @@ class _HomePageState extends State<HomePage> {
               })
         ],
       ),
-      bottomNavigationBar: _createBottomNavigationBar(),
+      bottomNavigationBar: BottomAppBar(
+          color: Theme.of(context).primaryColor,
+          shape: const CircularNotchedRectangle(),
+          child: Container(
+            height: 60,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                    child: IconButton(
+                        icon: Icon(Icons.map, color: Colors.white),
+                        onPressed: () {
+                          setState(() {
+                            currentIndex = 0;
+                          });
+                        })),
+                Expanded(
+                    child: IconButton(
+                        icon: Icon(
+                          Icons.devices_other,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            currentIndex = 1;
+                          });
+                        }))
+              ],
+            ),
+          )),
       body: _callPage(currentIndex),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
