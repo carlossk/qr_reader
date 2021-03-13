@@ -8,7 +8,7 @@ launchURL(BuildContext context, ScanModel scan) async {
     if (await canLaunch(scan.valor)) {
       await launch(scan.valor);
     } else {
-      throw 'Could not launch ${scan.valor}';
+      print( 'Could not launch ${scan.valor}');
     }
   } else {
     Navigator.pushNamed(context, 'map', arguments: scan);

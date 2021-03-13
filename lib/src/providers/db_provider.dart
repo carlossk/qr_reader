@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_reader/src/models/scan_model.dart';
+export 'package:qr_reader/src/models/scan_model.dart';
+
 import 'package:sqflite/sqflite.dart';
 
 class DBProvider {
@@ -18,7 +20,7 @@ class DBProvider {
     return _database;
   }
 
-  initDB() async {
+  Future<Database> initDB() async {
     Directory documentsPath = await getApplicationDocumentsDirectory();
 
     final path = join(documentsPath.path, 'ScansDB.db');
@@ -44,7 +46,7 @@ class DBProvider {
     return res;
   }
 
-  createScan(ScanModel entry) async {
+  Future<int> createScan(ScanModel entry) async {
     final Database db = await database;
 
     final res = await db.insert('Scans', entry.toJson());
@@ -69,9 +71,13 @@ class DBProvider {
 
   Future<List<ScanModel>> getScansByType(String type) async {
     final Database db = await database;
-    final res = await db.rawQuery("SELECT * FROM Scans WHARE tipo='$type'");
-    List<ScanModel> list =
-        res.isNotEmpty ? res.map((e) => ScanModel.fromJson(e)).toList() : [];
+    final res = await db.rawQuery("SELECT * FROM Scans WHERE tipo = '$type';");
+    List<ScanModel> list;
+    if (res.isNotEmpty) {
+      list = res.map((e) => ScanModel.fromJson(e)).toList();
+    } else {
+      list = [];
+    }
     return list;
   }
 
